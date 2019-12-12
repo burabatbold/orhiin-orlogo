@@ -60,6 +60,23 @@ var uiController = (function() {
         unuudur.getFullYear() + " оны " + unuudur.getMonth() + " сарын ";
     },
 
+    changeType: function() {
+      var fields = document.querySelectorAll(
+        DOMstrings.inputType +
+          ", " +
+          DOMstrings.inputDescription +
+          ", " +
+          DOMstrings.inputValue
+      );
+
+      nodeListForeach(fields, function(el) {
+        el.classList.toggle("red-focus");
+      });
+
+      document.querySelector(DOMstrings.addBtn).classList.toggle("red");
+      // location = "http://1234.mn/course";
+    },
+
     getInput: function() {
       return {
         type: document.querySelector(DOMstrings.inputType).value, // exp, inc
@@ -339,6 +356,10 @@ var appController = (function(uiController, financeController) {
         ctrlAddItem();
       }
     });
+
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", uiController.changeType);
 
     document
       .querySelector(DOM.containerDiv)
